@@ -22,3 +22,41 @@ a:hover {
   border-top: 2px solid rgba(0, 0, 0, 0.05);
   overflow: auto;
 }
+.autocomplete {
+  padding-top: 10px;
+  display: block;
+  position: absolute;
+  list-style: none;
+  background-color: rgb(25, 118, 210);
+  color: white;
+  z-index: 99;
+  margin-left:10px;
+  font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.autocomplete li {
+  display: none;
+  min-width: 240px;
+  padding: 5px 10px;
+  text-decoration: none;
+}
+.show-list li {
+  display: block;
+}
+.show-list li a{
+  color: white !important;
+  text-decoration: none;
+  font-size: 1.1;
+}
+.show-list li:hover {
+  cursor: pointer;
+  text-shadow: 0px 2px 9px rgba(150, 150, 150, 1);
+  background-color: rgb(85, 149, 214);
+}
+.search-error{
+  min-width: 240px;
+  text-align: left;
+  padding-bottom:10px;
+  padding-left:10px;
+  padding-right:5px
+}
+

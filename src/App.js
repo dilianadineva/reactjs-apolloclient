@@ -3,7 +3,7 @@ import React from 'react';
 import CharactersList from './pages/CharactersList';
 import { Routes, Route } from 'react-router-dom';
 import Character from './pages/Character';
-import Search from './pages/Search';
+import Search from './pages/SearchLocation';
 import SearchAppBar from './components/Navbar';
 
 function App() {

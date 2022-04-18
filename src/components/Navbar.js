@@ -11,7 +11,65 @@ import { Link } from 'react-router-dom';
 import SearchCharacter from './SearchCharacter';
 import { useNavigate } from 'react-router-dom';
 
-const Search = styled('div')(({ theme }) => ({
+export default function SearchAppBar() {
+  const navigate = useNavigate();
+  const [search, setSearch] = useState(null);
+  function handleSearchSubmit(e) {
+    e.preventDefault();
+    navigate('search', { state: search });
+  }
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position='static'>
+        <Toolbar>
+          <IconButton
+            size='large'
+            edge='start'
+            color='inherit'
+            aria-label='open drawer'
+            sx={{ mr: 2 }}
+          ></IconButton>
+          <Typography
+            variant='h6'
+            noWrap
+            component='div'
+            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+          >
+            <Link to={`/`}>React Apollo Demo</Link>
+          </Typography>
+          <SearchCharacter />
+          <form
+            onSubmit={(e) => {
+              handleSearchSubmit(e);
+            }}
+          >
+            <SearchLocation>
+              <Link
+                to={{
+                  pathname: '/search',
+                  state: { data: 'sampledata' },
+                }}
+              >
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+              </Link>
+              <StyledInputBase
+                placeholder='Search for a location'
+                inputProps={{ 'aria-label': 'search' }}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                }}
+              />
+            </SearchLocation> 
+          </form>
+        </Toolbar>
+      </AppBar>
+    </Box>
+  );
+}
+
+const SearchLocation = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
@@ -45,68 +103,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-      width: '12ch',
+      width: '18ch',
       '&:focus': {
-        width: '20ch',
+        width: '22ch',
       },
     },
   },
 }));
-
-export default function SearchAppBar() {
-  const navigate = useNavigate();
-  const [search, setSearch] = useState(null);
-  function handleSearchSubmit(e) {
-    e.preventDefault();
-    navigate('search', { state: search });
-  }
-  return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position='static'>
-        <Toolbar>
-          <IconButton
-            size='large'
-            edge='start'
-            color='inherit'
-            aria-label='open drawer'
-            sx={{ mr: 2 }}
-          ></IconButton>
-          <Typography
-            variant='h6'
-            noWrap
-            component='div'
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-          >
-            <Link to={`/`}>React Apollo Demo</Link>
-          </Typography>
-          <form
-            onSubmit={(e) => {
-              handleSearchSubmit(e);
-            }}
-          >
-            <Search>
-              <Link
-                to={{
-                  pathname: '/search',
-                  state: { data: 'sampledata' },
-                }}
-              >
-                <SearchIconWrapper>
-                  <SearchIcon />
-                </SearchIconWrapper>
-              </Link>
-              <StyledInputBase
-                placeholder='Search…'
-                inputProps={{ 'aria-label': 'search' }}
-                onChange={(e) => {
-                  setSearch(e.target.value);
-                }}
-              />
-            </Search>
-          </form>
-          <SearchCharacter />
-        </Toolbar>
-      </AppBar>
-    </Box>
-  );
-}

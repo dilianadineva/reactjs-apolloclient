@@ -10,6 +10,7 @@ const GET_CHARACTER_LOCATION = gql`
   query GetCharacterLocation($state: String!) {
     characters(filter: { name: $state }) {
       results {
+        name
         location {
           name
         }
@@ -35,32 +36,25 @@ function Search() {
       },
     }
   );
-
   return (
     <div>
-      {/* <input
-        type='text'
-        onChange={(e) => {
-          setName(e.target.value);
-        }}
-      />
-      <button
-        onClick={() => {
-          getLocations();
-        }}
-      >
-        Search
-      </button> */}
       {loading && <div>loading</div>}
       {error && <div>No data was found for {name} </div>}
       {data && (
         <Box sx={{ width: '100%' }}>
           <Stack alignItems='center' spacing={2}>
-            <Item style={{marginTop: '30px', boxShadow: 'none'}}>
-              <h3>Locations for '{name}': </h3>
+            <Item style={{ marginTop: '30px', boxShadow: 'none' }}>
+              <h3>Location search results for '{name}': </h3>
             </Item>
             {data.characters.results.map((character) => {
-              return <Item>{character.location.name}</Item>;
+              return (
+                <>
+                  <Item style={{ marginTop: '30px', boxShadow: 'none' }}>
+                    <h4>Location for '{character.name}': </h4>
+                  </Item>
+                  <Item>{character.location.name}</Item>
+                </>
+              );
             })}
           </Stack>
         </Box>
