@@ -55,7 +55,7 @@ export default function SearchAppBar() {
                 </SearchIconWrapper>
               </Link>
               <StyledInputBase
-                placeholder='Find character location'
+                placeholder='Search for a location'
                 inputProps={{ 'aria-label': 'search' }}
                 onChange={(e) => {
                   setSearch(e.target.value);
