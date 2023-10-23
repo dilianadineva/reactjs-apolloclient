@@ -40,7 +40,7 @@ function SearchCharacter() {
           <SearchIcon />
         </SearchIconWrapper>
         <StyledInputBase
-          placeholder='Search for a location'
+          placeholder='Search for a character'
           inputProps={{ 'aria-label': 'search character' }}
           onChange={(e) => {
             setName(e.target.value);
